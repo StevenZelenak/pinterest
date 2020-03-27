@@ -6,11 +6,13 @@ import apiKeys from './helpers/apiKeys.json';
 import '../styles/main.scss';
 import auth from './components/auth/auth';
 import authData from './helpers/authData';
+import logout from './components/logout/logout';
 
 const init = () => {
   firebase.initializeApp(apiKeys.firebaseKeys);
-  auth.loginButton();
   authData.checkLoginStatus();
+  auth.loginButton();
+  logout.logout();
 };
 
 init();

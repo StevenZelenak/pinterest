@@ -1,0 +1,38 @@
+{
+  "pins1": {
+    "imageURL": "https://via.placeholder.com/640x360",
+    "boardId": "baords1"
+  },
+  "pins2": {
+    "imageURL": "https://via.placeholder.com/640x360",
+    "boardId": "boards1"
+  },
+  "pins3": {
+    "imageURL": "https://via.placeholder.com/640x360",
+    "boardId": "boards1"
+  },
+  "pins4": {
+    "imageURL": "https://via.placeholder.com/640x360",
+    "boardId": "baords2"
+  },
+  "pins5": {
+    "imageURL": "https://via.placeholder.com/640x360",
+    "boardId": "boards2"
+  },
+  "pins6": {
+    "imageURL": "https://via.placeholder.com/640x360",
+    "boardId": "boards2"
+  },
+  "pins7": {
+    "imageURL": "https://via.placeholder.com/640x360",
+    "boardId": "baords3"
+  },
+  "pins8": {
+    "imageURL": "https://via.placeholder.com/640x360",
+    "boardId": "boards3"
+  },
+  "pins9": {
+    "imageURL": "https://via.placeholder.com/640x360",
+    "boardId": "boards3"
+  }
+}

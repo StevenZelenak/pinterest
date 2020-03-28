@@ -1,16 +1,15 @@
-import utils from '../../helpers/utils';
+const boardMaker = (board) => {
+  let domString = '';
+  domString += '<div class="card col-3 mx-2">';
+  domString += '<div class="card-body">';
+  domString += `<h5 class="card-title">${board.name}</h5>`;
+  domString += `<p class="card-text">${board.description}</p>`;
+  domString += '</div>';
+  domString += '</div>';
 
-const createBoardPage = () => {
-  const domString = '<h1>Board</h1>';
-  utils.printToDom('pint-board', domString);
-};
-
-const removeBoardPage = () => {
-  const domString = '';
-  utils.printToDom('pint-board', domString);
+  return domString;
 };
 
 export default {
-  createBoardPage,
-  removeBoardPage,
+  boardMaker,
 };

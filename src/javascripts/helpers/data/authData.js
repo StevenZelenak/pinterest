@@ -1,10 +1,12 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import boards from '../../components/boards/boards';
+import boards from '../../components/boardsPage/boardsPage';
 import home from '../../components/home/home';
 
 const loginDiv = $('#login');
 const logoutButton = $('#logout');
+
+const getCurrentUid = () => firebase.auth().currentUser.uid;
 
 const checkLoginStatus = () => {
   firebase.auth().onAuthStateChanged((user) => {
@@ -24,4 +26,5 @@ const checkLoginStatus = () => {
 
 export default {
   checkLoginStatus,
+  getCurrentUid,
 };

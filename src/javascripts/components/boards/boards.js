@@ -1,26 +1,15 @@
-import utils from '../../helpers/utils';
-import boardsData from '../../helpers/data/boardsData';
+const boardMaker = (board) => {
+  let domString = '';
+  domString += '<div class="card col-3 mx-2">';
+  domString += '<div class="card-body">';
+  domString += `<h5 class="card-title">${board.name}</h5>`;
+  domString += `<p class="card-text">${board.description}</p>`;
+  domString += '</div>';
+  domString += '</div>';
 
-const createBoards = () => {
-  boardsData.getBoards()
-    .then((itworked) => console.error('it worked', itworked))
-    .catch((err) => console.error('it did not work', err));
+  return domString;
 };
-
-const createBoardPage = () => {
-  const domString = '<h1>Boards</h1>';
-  utils.printToDom('pint-board', domString);
-  createBoards();
-};
-
-const removeBoardPage = () => {
-  const domString = '';
-  utils.printToDom('pint-board', domString);
-};
-
 
 export default {
-  createBoardPage,
-  removeBoardPage,
-  createBoards,
+  boardMaker,
 };

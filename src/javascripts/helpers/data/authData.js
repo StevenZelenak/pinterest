@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import boards from '../components/boards/boards';
-import home from '../components/home/home';
+import boards from '../../components/boards/boards';
+import home from '../../components/home/home';
 
 const loginDiv = $('#login');
 const logoutButton = $('#logout');

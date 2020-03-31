@@ -4,6 +4,7 @@ import 'firebase/auth';
 import utils from '../../helpers/utils';
 import boardsData from '../../helpers/data/boardsData';
 import boards from '../boards/boards';
+import pinsData from '../../helpers/data/pinsData';
 
 
 const createBoardPage = () => {
@@ -19,9 +20,11 @@ const createBoardPage = () => {
       });
       domString += '</div>';
       utils.printToDom('pint-board', domString);
+      $('body').on('click', '.board-card', pinsData.getPins);
     })
     .catch((err) => console.error('it did not work', err));
 };
+
 
 const removeBoardPage = () => {
   const domString = '';

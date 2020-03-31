@@ -33,7 +33,14 @@ const getBoardsByUid = (uid) => new Promise((resolve, reject) => {
     .catch((err) => reject(err));
 });
 
+const getSingleBoard = (boardsId) => {
+  const boards = [];
+  boards.push(getBoardsByUid);
+  return console.error(boards, boardsId);
+};
+
 export default {
   getBoards,
   getBoardsByUid,
+  getSingleBoard,
 };

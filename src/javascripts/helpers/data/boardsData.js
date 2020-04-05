@@ -1,7 +1,13 @@
 import axios from 'axios';
 import apiKeys from '../apiKeys.json';
+import pinsData from './pinsData';
+import pinsMaker from '../../components/pinsMaker/pinsMaker';
+import utils from '../utils';
 
 const baseURL = apiKeys.firebaseKeys.databaseURL;
+
+const pinDiv = $('#pint-pin');
+const boardDiv = $('#pint-board');
 
 const getBoards = () => new Promise((resolve, reject) => {
   axios.get(`${baseURL}/boards.json`)
@@ -33,14 +39,32 @@ const getBoardsByUid = (uid) => new Promise((resolve, reject) => {
     .catch((err) => reject(err));
 });
 
-const getSingleBoard = (boardsId) => {
-  const boards = [];
-  boards.push(getBoardsByUid);
-  return console.error(boards, boardsId);
+const createSingleBoard = (selectedBoardId) => {
+  pinsData.getPins(selectedBoardId)
+    .then((pins) => {
+      let domString = '';
+      // I need to some how grab the name from the boards and put it in front of the h1 pins
+      domString += '<h1 class="text-center my-4 ">Pins</h1>';
+      domString += '<div class="d-flex flex-wrap justify-content-center">';
+      pins.forEach((pin) => {
+        domString += pinsMaker.pinMaker(pin);
+      });
+      domString += '</div">';
+      utils.printToDom('pint-pin', domString);
+      pinDiv.removeClass('hide');
+      boardDiv.addClass('hide');
+    })
+    .catch((err) => console.error('get pins by boardId broke', err));
 };
+
+const singleBoardEvent = (e) => {
+  const selectedBoardId = e.target.closest('.card').id;
+  createSingleBoard(selectedBoardId);
+};
+
 
 export default {
   getBoards,
   getBoardsByUid,
-  getSingleBoard,
+  singleBoardEvent,
 };

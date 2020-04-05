@@ -3,7 +3,7 @@ import 'firebase/auth';
 
 import utils from '../../helpers/utils';
 import boardsData from '../../helpers/data/boardsData';
-import boards from '../boards/boards';
+import boards from '../boardsMaker/boardsMaker';
 
 
 const createBoardPage = () => {
@@ -19,9 +19,11 @@ const createBoardPage = () => {
       });
       domString += '</div>';
       utils.printToDom('pint-board', domString);
+      $('body').on('click', '.board-card', boardsData.singleBoardEvent);
     })
     .catch((err) => console.error('it did not work', err));
 };
+
 
 const removeBoardPage = () => {
   const domString = '';

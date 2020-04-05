@@ -44,6 +44,15 @@ const returnToBoards = () => {
   boardDiv.removeClass('hide');
 };
 
+const removePin = (e) => {
+  const pinId = e.target.closest('.card').id;
+  console.error(e.data);
+  pinsData.deletePin(pinId)
+    // eslint-disable-next-line no-use-before-define
+    .then(() => createSingleBoard())
+    .catch((err) => console.error('could not delete pin', err));
+};
+
 const createSingleBoard = (selectedBoardId) => {
   pinsData.getPins(selectedBoardId)
     .then((pins) => {
@@ -60,6 +69,7 @@ const createSingleBoard = (selectedBoardId) => {
       pinDiv.removeClass('hide');
       boardDiv.addClass('hide');
       $('#backButton').click(returnToBoards);
+      $('.delete-pin').click(removePin);
     })
     .catch((err) => console.error('get pins by boardId broke', err));
 };

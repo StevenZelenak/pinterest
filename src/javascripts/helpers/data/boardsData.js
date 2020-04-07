@@ -46,15 +46,15 @@ const returnToBoards = () => {
 
 const removePin = (e) => {
   const pinId = e.target.closest('.card').id;
-  console.error(e.data);
+  const BoardId = e.data;
   pinsData.deletePin(pinId)
     // eslint-disable-next-line no-use-before-define
-    .then(() => createSingleBoard())
-    .catch((err) => console.error('could not delete pin', err));
+    .then(() => createSingleBoard(BoardId))
+    .catch((err) => console.error('the removes pin funciton did not work', err));
 };
 
-const createSingleBoard = (selectedBoardId) => {
-  pinsData.getPins(selectedBoardId)
+const createSingleBoard = (BoardId) => {
+  pinsData.getPins(BoardId)
     .then((pins) => {
       let domString = '';
       // I need to some how grab the name from the boards and put it in front of the h1 pins
@@ -69,16 +69,15 @@ const createSingleBoard = (selectedBoardId) => {
       pinDiv.removeClass('hide');
       boardDiv.addClass('hide');
       $('#backButton').click(returnToBoards);
-      $('.delete-pin').click(removePin);
+      $('body').on('click', '.delete-pin', BoardId, removePin);
     })
     .catch((err) => console.error('get pins by boardId broke', err));
 };
 
 const singleBoardEvent = (e) => {
-  const selectedBoardId = e.target.closest('.card').id;
-  createSingleBoard(selectedBoardId);
+  const BoardId = e.target.closest('.card').id;
+  createSingleBoard(BoardId);
 };
-
 
 export default {
   getBoards,

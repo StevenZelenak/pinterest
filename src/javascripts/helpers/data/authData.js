@@ -21,6 +21,7 @@ const checkLoginStatus = () => {
       boardsPage.buildBoardPage();
       home.HomePage(user);
       $('body').on('click', '.board-card', singleBoard.singleBoardEvent);
+      $('body').on('click', '.delete-pin', singleBoard.removePinFromSingeleBoard);
     } else {
       homePageDiv.removeClass('hide');
       loginDiv.removeClass('hide');

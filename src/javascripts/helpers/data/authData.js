@@ -3,6 +3,7 @@ import 'firebase/auth';
 import home from '../../components/homePage/home';
 import boardsPage from '../../components/boardsPage/boardsPage';
 import singleBoard from '../../components/singelBoard/singleBoard';
+import createBoard from '../../components/createBoard/createBoard';
 
 const loginDiv = $('#login');
 const logoutButton = $('#logout');
@@ -22,6 +23,8 @@ const checkLoginStatus = () => {
       home.HomePage(user);
       $('body').on('click', '.board-card', singleBoard.singleBoardEvent);
       $('body').on('click', '.delete-pin', singleBoard.removePinFromSingeleBoard);
+      $('body').on('click', '#create-board-form', createBoard.createBoardForm);
+      $('body').on('click', '#create-board', createBoard.makeABoard);
     } else {
       homePageDiv.removeClass('hide');
       loginDiv.removeClass('hide');

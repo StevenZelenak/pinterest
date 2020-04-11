@@ -28,6 +28,9 @@ const buildBoardPage = () => {
     .then((itworked) => {
       let domString = '';
       domString += '<h1 class="mb-4">Boards</h1>';
+      domString += '<div class= "mb-3">';
+      domString += '<button id="create-board-form" class="btn btn-success my-2 my-sm-0" type="submit">Create Board</button>';
+      domString += '</div>';
       domString += '<div class="d-flex flex-wrap justify-content-center">';
       itworked.forEach((board) => {
         domString += boards.boardMaker(board);

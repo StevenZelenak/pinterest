@@ -1,6 +1,6 @@
 const boardMaker = (board) => {
   let domString = '';
-  domString += `<div id="${board.id}"class="card col-3 mx-2">`;
+  domString += `<div id="${board.id}"class="card mb-2 col-3 mx-2">`;
   domString += '<div class="card-body board-card ">';
   domString += `<h5 class="card-title">${board.name}</h5>`;
   domString += `<p class="card-text">${board.description}</p>`;

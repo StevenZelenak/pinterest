@@ -14,7 +14,6 @@ const returnToBoards = () => {
 const removePinFromSingeleBoard = (e) => {
   const pinId = e.target.closest('.card').id;
   const BoardId = e.target.closest('.boardId').id;
-  console.error(BoardId);
   pinsData.deletePin(pinId)
     // eslint-disable-next-line no-use-before-define
     .then(() => buildSingleBoard(BoardId))

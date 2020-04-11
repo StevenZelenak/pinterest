@@ -4,6 +4,22 @@ import 'firebase/auth';
 import utils from '../../helpers/utils';
 import boardsData from '../../helpers/data/boardsData';
 import boards from '../boardsMaker/boardsMaker';
+import pinsData from '../../helpers/data/pinsData';
+
+const removeBoardFromPage = (e) => {
+  const boardId = e.target.closest('.card').id;
+  boardsData.deleteBoard(boardId)
+    .then(() => {
+      pinsData.getPins(boardId).then((pins) => {
+        pins.forEach((pin) => {
+          pinsData.deletePin(pin.id);
+        });
+      });
+      // eslint-disable-next-line no-use-before-define
+      buildBoardPage();
+    })
+    .catch((err) => console.error('the removes board function did not work', err));
+};
 
 const buildBoardPage = () => {
   const getFireCurrentUser = firebase.auth().currentUser;
@@ -18,6 +34,7 @@ const buildBoardPage = () => {
       });
       domString += '</div>';
       utils.printToDom('pint-board', domString);
+      $('body').on('click', '.delete-board', removeBoardFromPage);
     })
     .catch((err) => console.error('it did not work', err));
 };
@@ -25,4 +42,5 @@ const buildBoardPage = () => {
 
 export default {
   buildBoardPage,
+  removeBoardFromPage,
 };

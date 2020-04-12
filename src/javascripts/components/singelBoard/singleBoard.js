@@ -25,6 +25,9 @@ const buildSingleBoard = (BoardId) => {
     .then((pins) => {
       let domString = '';
       domString += '<h1 class="text-center my-4 ">Pins</h1>';
+      domString += '<div class= "mb-3 text-center">';
+      domString += '<button id="create-pin-form" class="btn btn-success my-2 my-sm-0" type="submit">Create Pin</button>';
+      domString += '</div>';
       domString += `<div id="${BoardId}" class="boardId d-flex flex-wrap justify-content-center">`;
       domString += '<button id="backButton"><i class="fas fa-arrow-left"></i> Back</button>';
       pins.forEach((pin) => {

@@ -22,16 +22,16 @@ const createPinForm = () => {
 
 const makeAPin = (e) => {
   e.preventDefault();
-  const pinBoardId = 2;
+  const pinBoardId = window.localStorage.getItem('boardId');
   const newPin = {
-    name: $('#board-name').val(),
+    imageURL: $('#pin-image').val(),
     boardId: pinBoardId,
   };
   pinsData.addPin(newPin)
     .then(() => {
       pinDiv.removeClass('hide');
       singleBoard.buildSingleBoard(pinBoardId);
-      utils.printToDom('pint-create-form', '');
+      utils.printToDom('pint-create-form-pin', '');
     })
     .catch((err) => console.error('could not add board', err));
 };

@@ -20,17 +20,20 @@ const removePinFromSingeleBoard = (e) => {
     .catch((err) => console.error('the removes pin function did not work', err));
 };
 
-const buildSingleBoard = (BoardId) => {
-  pinsData.getPins(BoardId)
+const buildSingleBoard = (boardId) => {
+  pinsData.getPins(boardId)
     .then((pins) => {
       let domString = '';
       domString += '<h1 class="text-center my-4 ">Pins</h1>';
-      domString += `<div id="${BoardId}" class="boardId d-flex flex-wrap justify-content-center">`;
+      domString += '<div class= "mb-3 text-center">';
+      domString += '<button id="create-pin-form" class="btn btn-success my-2 my-sm-0" type="submit">Create Pin</button>';
+      domString += '</div>';
+      domString += `<div id="${boardId}" class="boardId d-flex flex-wrap justify-content-center">`;
       domString += '<button id="backButton"><i class="fas fa-arrow-left"></i> Back</button>';
       pins.forEach((pin) => {
         domString += pinsMaker.pinMaker(pin);
       });
-      domString += '</div">';
+      domString += '</div>';
       utils.printToDom('pint-pin', domString);
       pinDiv.removeClass('hide');
       boardDiv.addClass('hide');
@@ -41,11 +44,13 @@ const buildSingleBoard = (BoardId) => {
 
 
 const singleBoardEvent = (e) => {
-  const BoardId = e.target.closest('.card').id;
-  buildSingleBoard(BoardId);
+  const boardId = e.target.closest('.card').id;
+  window.localStorage.setItem('boardId', boardId);
+  buildSingleBoard(boardId);
 };
 
 export default {
   singleBoardEvent,
   removePinFromSingeleBoard,
+  buildSingleBoard,
 };

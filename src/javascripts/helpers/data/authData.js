@@ -4,6 +4,7 @@ import home from '../../components/homePage/home';
 import boardsPage from '../../components/boardsPage/boardsPage';
 import singleBoard from '../../components/singelBoard/singleBoard';
 import createBoard from '../../components/createBoard/createBoard';
+import createPins from '../../components/createPins/createPins';
 
 const loginDiv = $('#login');
 const logoutButton = $('#logout');
@@ -24,7 +25,9 @@ const checkLoginStatus = () => {
       $('body').on('click', '.board-card', singleBoard.singleBoardEvent);
       $('body').on('click', '.delete-pin', singleBoard.removePinFromSingeleBoard);
       $('body').on('click', '#create-board-form', createBoard.createBoardForm);
+      $('body').on('click', '#create-pin-form', createPins.createPinForm);
       $('body').on('click', '#create-board', createBoard.makeABoard);
+      $('body').on('click', '#create-pin', createPins.makeAPin);
     } else {
       homePageDiv.removeClass('hide');
       loginDiv.removeClass('hide');

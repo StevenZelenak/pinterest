@@ -30,7 +30,6 @@ const makeAPin = (e) => {
   pinsData.addPin(newPin)
     .then(() => {
       pinDiv.removeClass('hide');
-      // eslint-disable-next-line no-use-before-define
       singleBoard.buildSingleBoard(pinBoardId);
       utils.printToDom('pint-create-form', '');
     })

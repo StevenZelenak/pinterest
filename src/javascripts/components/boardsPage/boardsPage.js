@@ -3,10 +3,40 @@ import 'firebase/auth';
 
 import utils from '../../helpers/utils';
 import boardsData from '../../helpers/data/boardsData';
-import boards from '../boardsMaker/boardsMaker';
+import boardDivs from '../boardDivs/boardDivs';
 import pinsData from '../../helpers/data/pinsData';
 
-const removeBoardFromPage = (e) => {
+const createFormDiv = $('#pint-create-form');
+const boardDiv = $('#pint-board');
+
+// All Functions relating to the boards overall
+const buildCreateBoardForm = () => {
+  boardDiv.addClass('hide');
+  createFormDiv.removeClass('hide');
+  // Calls the create board form and attaches it to the domString to print out
+  let domString = '';
+  domString += boardDivs.createBoardForm();
+  utils.printToDom('pint-create-form', domString);
+};
+
+const createABoardCard = (e) => {
+  e.preventDefault();
+  const newBoard = {
+    name: $('#board-name').val(),
+    description: $('#board-description').val(),
+    uid: firebase.auth().currentUser.uid,
+  };
+  boardsData.addBoard(newBoard)
+    .then(() => {
+      boardDiv.removeClass('hide');
+      // eslint-disable-next-line no-use-before-define
+      buildBoardPage();
+      utils.printToDom('pint-create-form', '');
+    })
+    .catch((err) => console.error('could not add board', err));
+};
+
+const removeBoardCardFromPage = (e) => {
   const boardId = e.target.closest('.card').id;
   boardsData.deleteBoard(boardId)
     .then(() => {
@@ -33,17 +63,17 @@ const buildBoardPage = () => {
       domString += '</div>';
       domString += '<div class="d-flex flex-wrap justify-content-center">';
       itworked.forEach((board) => {
-        domString += boards.boardMaker(board);
+        domString += boardDivs.boardCardCreator(board);
       });
       domString += '</div>';
       utils.printToDom('pint-board', domString);
-      $('body').on('click', '.delete-board', removeBoardFromPage);
     })
     .catch((err) => console.error('it did not work', err));
 };
 
-
 export default {
   buildBoardPage,
-  removeBoardFromPage,
+  removeBoardCardFromPage,
+  createABoardCard,
+  buildCreateBoardForm,
 };

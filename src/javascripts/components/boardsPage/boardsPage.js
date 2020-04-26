@@ -7,6 +7,7 @@ import boardDivs from '../boardDivs/boardDivs';
 import pinsData from '../../helpers/data/pinsData';
 
 const createFormDiv = $('#pint-create-form');
+const editFormBoardDiv = $('#pint-edit-board-form');
 const boardDiv = $('#pint-board');
 
 // All Functions relating to the boards overall
@@ -51,9 +52,45 @@ const removeBoardCardFromPage = (e) => {
     .catch((err) => console.error('the removes board function did not work', err));
 };
 
+const callBoardEditForm = (boardId) => {
+  boardDiv.addClass('hide');
+  editFormBoardDiv.removeClass('hide');
+
+  boardsData.getSingleBoard(boardId)
+    .then((selectedBoard) => {
+      let domString = '';
+      domString += boardDivs.createEditBoardForm(boardId, selectedBoard);
+      utils.printToDom('pint-edit-board-form', domString);
+    })
+    .catch((err) => console.error('edit board did not work', err));
+};
+
+const editBoardEvent = (e) => {
+  const boardId = e.target.closest('.card').id;
+  callBoardEditForm(boardId);
+};
+
+const submitEditBoardEvent = (e) => {
+  e.preventDefault();
+  const selectedBoardId = e.target.closest('form').id;
+  const modifiedBoard = {
+    name: $('#edit-board-name').val(),
+    description: $('#edit-board-description').val(),
+    uid: firebase.auth().currentUser.uid,
+  };
+  boardsData.updateBoard(selectedBoardId, modifiedBoard)
+    .then(() => {
+      // eslint-disable-next-line no-use-before-define
+      buildBoardPage();
+      utils.printToDom('pint-edit-board-form', '');
+    })
+    .catch((err) => console.error('could not update board', err));
+};
+
 const buildBoardPage = () => {
   const getFireCurrentUser = firebase.auth().currentUser;
   const getUserUid = getFireCurrentUser.uid;
+  boardDiv.removeClass('hide');
   boardsData.getBoardsByUid(getUserUid)
     .then((itworked) => {
       let domString = '';
@@ -76,4 +113,7 @@ export default {
   removeBoardCardFromPage,
   createABoardCard,
   buildCreateBoardForm,
+  callBoardEditForm,
+  editBoardEvent,
+  submitEditBoardEvent,
 };

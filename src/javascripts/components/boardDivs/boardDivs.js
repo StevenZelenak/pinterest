@@ -5,7 +5,10 @@ const boardCardCreator = (board) => {
   domString += `<h5 class="card-title">${board.name}</h5>`;
   domString += `<p class="card-text">${board.description}</p>`;
   domString += '</div>';
-  domString += '<button class="btn btn-danger delete-board"><i class="fas fa-dumpster-fire"> Delete</i></button>';
+  domString += '<div class="wrap">';
+  domString += '<button class="btn btn-danger delete-board my-2 mx-2"><i class="fas fa-dumpster-fire"> Delete</i></button>';
+  domString += '<button class="btn btn-success edit-board-form my-2 mx-2"><i class="far fa-edit"> Edit</i></button>';
+  domString += '</div>';
   domString += '</div>';
 
   return domString;
@@ -29,7 +32,26 @@ const createBoardForm = () => {
   return domString;
 };
 
+const createEditBoardForm = (boardId, selectedBoard) => {
+  let domString = '';
+  domString += '<h1 class="text-center" >Edit Board</h1>';
+  domString += `<form id=${boardId} class="col-4">`;
+  domString += '<div class="form-group">';
+  domString += '<label for="edit-board-name">Board Name:</label>';
+  domString += `<input type="text" class="form-control" id="edit-board-name" aria-describedby="emailHelp" value="${selectedBoard.data.name}">`;
+  domString += '</div>';
+  domString += '<div class="form-group">';
+  domString += '<label for="edit-board-description">Board Description:</label>';
+  domString += `<input type="text" class="form-control" id="edit-board-description" value="${selectedBoard.data.description}">`;
+  domString += '</div>';
+  domString += '<button id="edit-board" type="submit" class="btn btn-primary">Complete Edit</button>';
+  domString += '</form>';
+
+  return domString;
+};
+
 export default {
   boardCardCreator,
   createBoardForm,
+  createEditBoardForm,
 };

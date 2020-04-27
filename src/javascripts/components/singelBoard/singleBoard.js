@@ -1,12 +1,12 @@
 import pinsData from '../../helpers/data/pinsData';
 import pinsMaker from '../pinsMaker/pinsMaker';
-import createPinsForm from '../createPinsForm/createPinsForm';
 import utils from '../../helpers/utils';
 
 
 const pinDiv = $('#pint-pin');
 const boardDiv = $('#pint-board');
 const createFormDiv = $('#pint-create-form-pin');
+const editFormDiv = $('#pint-edit-pin-form');
 
 const returnToBoards = () => {
   pinDiv.addClass('hide');
@@ -46,8 +46,43 @@ const callPinCreateForm = (e) => {
   pinDiv.addClass('hide');
   createFormDiv.removeClass('hide');
   let domString = '';
-  domString += createPinsForm.createPinForm(boardId);
+  domString += pinsMaker.createPinForm(boardId);
   utils.printToDom('pint-create-form-pin', domString);
+};
+const submitEditPinEvent = (e) => {
+  e.preventDefault();
+  const selectedPinId = e.target.closest('form').id;
+  const pinBoardId = e.target.dataset.boardId;
+  const modifiedPin = {
+    imageUrl: $('#edit-pin-image').val(),
+    boardId: pinBoardId,
+  };
+  pinsData.updatePin(selectedPinId, modifiedPin)
+    .then(() => {
+      // eslint-disable-next-line no-use-before-define
+      buildSingleBoard(pinBoardId);
+      utils.printToDom('pint-edit-pin-form', '');
+    })
+    .catch((err) => console.error('could not update board', err));
+};
+
+const callPinEditForm = (pinId, pinBoardId) => {
+  pinDiv.addClass('hide');
+  editFormDiv.removeClass('hide');
+  const pinBoardIdContainer = pinBoardId;
+  pinsData.getSinglePin(pinId)
+    .then((selectedPin) => {
+      let domString = '';
+      domString += pinsMaker.EditPinForm(pinId, selectedPin, pinBoardIdContainer);
+      utils.printToDom('pint-edit-pin-form', domString);
+    })
+    .catch((err) => console.error('edit pin did not work', err));
+};
+
+const editPinEvent = (e) => {
+  const pinBoardId = e.target.dataset.boardId;
+  const pinId = e.target.closest('.card').id;
+  callPinEditForm(pinId, pinBoardId);
 };
 
 const buildSingleBoard = (boardId) => {
@@ -84,4 +119,6 @@ export default {
   buildSingleBoard,
   makeAPinForASingleBoard,
   callPinCreateForm,
+  editPinEvent,
+  submitEditPinEvent,
 };

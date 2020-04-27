@@ -21,6 +21,8 @@ const events = () => {
   $('body').on('click', '#create-pin-form', singleBoard.callPinCreateForm);
   $('body').on('click', '.edit-board-form', boardsPage.editBoardEvent);
   $('body').on('click', '#edit-board', boardsPage.submitEditBoardEvent);
+  $('body').on('click', '.edit-pin-form', singleBoard.editPinEvent);
+  $('body').on('click', '#edit-pin', singleBoard.submitEditPinEvent);
 };
 
 const checkLoginStatus = () => {

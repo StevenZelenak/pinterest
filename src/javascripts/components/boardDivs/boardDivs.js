@@ -16,7 +16,9 @@ const boardCardCreator = (board) => {
 
 const createBoardForm = () => {
   let domString = '';
-  domString += '<h1 class="text-center" >Create Board</h1>';
+  domString += '<h1 class="text-center mb-3" >Create Board</h1>';
+  domString += '<div class="container text-center">';
+  domString += '<div class="row justify-content-center">';
   domString += '<form class="col-4">';
   domString += '<div class="form-group">';
   domString += '<label for="board-name">Board Name:</label>';
@@ -28,13 +30,17 @@ const createBoardForm = () => {
   domString += '</div>';
   domString += '<button id="create-board" type="submit" class="btn btn-primary">Create</button>';
   domString += '</form>';
+  domString += '</div>';
+  domString += '</div>';
 
   return domString;
 };
 
 const createEditBoardForm = (boardId, selectedBoard) => {
   let domString = '';
-  domString += '<h1 class="text-center" >Edit Board</h1>';
+  domString += '<h1 class="text-center mb-3" >Edit Board</h1>';
+  domString += '<div class="container text-center">';
+  domString += '<div class="row justify-content-center">';
   domString += `<form id=${boardId} class="col-4">`;
   domString += '<div class="form-group">';
   domString += '<label for="edit-board-name">Board Name:</label>';
@@ -46,6 +52,8 @@ const createEditBoardForm = (boardId, selectedBoard) => {
   domString += '</div>';
   domString += '<button id="edit-board" type="submit" class="btn btn-primary">Complete Edit</button>';
   domString += '</form>';
+  domString += '</div>';
+  domString += '</div>';
 
   return domString;
 };

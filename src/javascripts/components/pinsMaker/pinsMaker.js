@@ -13,20 +13,26 @@ const pinMaker = (pin) => {
 
 const createPinForm = (boardId) => {
   let domString = '';
-  domString += '<h1 class="text-center">Create Pin</h1>';
+  domString += '<h1 class="text-center mb-3">Create Pin</h1>';
+  domString += '<div class="container text-center">';
+  domString += '<div class="row justify-content-center">';
   domString += '<form class="col-4">';
   domString += '<div class="form-group">';
   domString += '<label for="pin-image">Image Url:</label>';
-  domString += '<input type="text" class="form-control" id="pin-image" aria-describedby="emailHelp" placeholder="Image Url">';
+  domString += '<input type="text" class="form-control" id="pin-image" aria-describedby="emailHelp" placeholder="Enter image Url">';
   domString += '</div>';
   domString += `<button data-board-Id=${boardId} id="create-pin" type="submit" class="btn btn-primary">Create</button>`;
   domString += '</form>';
+  domString += '</div>';
+  domString += '</div>';
   return domString;
 };
 
 const EditPinForm = (pinId, selectedPin, pinBoardId) => {
   let domString = '';
-  domString += '<h1 class="text-center">Edit Pin</h1>';
+  domString += '<h1 class="text-center mb-3">Edit Pin</h1>';
+  domString += '<div class="container text-center">';
+  domString += '<div class="row justify-content-center">';
   domString += `<form id=${pinId} class="col-4">`;
   domString += '<div class="form-group">';
   domString += '<label for="edit-pin-image">Image Url:</label>';
@@ -34,6 +40,8 @@ const EditPinForm = (pinId, selectedPin, pinBoardId) => {
   domString += '</div>';
   domString += `<button data-board-Id=${pinBoardId} id="edit-pin" type="submit" class="btn btn-primary">Complete Edit</button>`;
   domString += '</form>';
+  domString += '</div>';
+  domString += '</div>';
   return domString;
 };
 

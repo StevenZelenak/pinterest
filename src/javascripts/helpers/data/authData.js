@@ -23,6 +23,7 @@ const events = () => {
   $('body').on('click', '#edit-board', boardsPage.submitEditBoardEvent);
   $('body').on('click', '.edit-pin-form', singleBoard.editPinEvent);
   $('body').on('click', '#edit-pin', singleBoard.submitEditPinEvent);
+  $('body').on('click', '#home-button', boardsPage.goHome);
 };
 
 const checkLoginStatus = () => {

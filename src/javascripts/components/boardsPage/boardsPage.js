@@ -87,6 +87,7 @@ const submitEditBoardEvent = (e) => {
     .catch((err) => console.error('could not update board', err));
 };
 
+
 const buildBoardPage = () => {
   const getFireCurrentUser = firebase.auth().currentUser;
   const getUserUid = getFireCurrentUser.uid;
@@ -108,6 +109,16 @@ const buildBoardPage = () => {
     .catch((err) => console.error('it did not work', err));
 };
 
+const goHome = () => {
+  boardDiv.removeClass('hide');
+  createFormDiv.addClass('hide');
+  editFormBoardDiv.addClass('hide');
+  $('#pint-pin').addClass('hide');
+  $('#pint-create-form-pin').addClass('hide');
+  $('#pint-edit-pin-form').addClass('hide');
+  buildBoardPage();
+};
+
 export default {
   buildBoardPage,
   removeBoardCardFromPage,
@@ -116,4 +127,5 @@ export default {
   callBoardEditForm,
   editBoardEvent,
   submitEditBoardEvent,
+  goHome,
 };

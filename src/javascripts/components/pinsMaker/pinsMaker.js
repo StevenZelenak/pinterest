@@ -1,3 +1,5 @@
+import boardsPage from '../boardsPage/boardsPage';
+
 const pinMaker = (pin) => {
   let domString = '';
   domString += `<div id="${pin.id}" class="card col-3 mx-2 mb-4" style="width: 20rem";>`;
@@ -30,6 +32,7 @@ const createPinForm = (boardId) => {
 
 const EditPinForm = (pinId, selectedPin, pinBoardId) => {
   let domString = '';
+  console.error('pinBoardId', pinBoardId);
   domString += '<h1 class="text-center mb-3">Edit Pin</h1>';
   domString += '<div class="container text-center">';
   domString += '<div class="row justify-content-center">';
@@ -37,6 +40,9 @@ const EditPinForm = (pinId, selectedPin, pinBoardId) => {
   domString += '<div class="form-group">';
   domString += '<label for="edit-pin-image">Image Url:</label>';
   domString += `<input type="text" class="form-control" id="edit-pin-image" aria-describedby="emailHelp" value="${selectedPin.data.imageURL}">`;
+  domString += '</div>';
+  domString += '<div id="checkbox-div" class="my-2">';
+  boardsPage.buildBoardCheckBoxes(pinBoardId);
   domString += '</div>';
   domString += `<button data-board-Id=${pinBoardId} id="edit-pin" type="submit" class="btn btn-primary">Complete Edit</button>`;
   domString += '</form>';

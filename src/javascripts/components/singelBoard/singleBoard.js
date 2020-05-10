@@ -49,13 +49,15 @@ const callPinCreateForm = (e) => {
   domString += pinsMaker.createPinForm(boardId);
   utils.printToDom('pint-create-form-pin', domString);
 };
+
 const submitEditPinEvent = (e) => {
   e.preventDefault();
+  console.error($('[name = "selectedBoard"]').val());
   const selectedPinId = e.target.closest('form').id;
   const pinBoardId = e.target.dataset.boardId;
   const modifiedPin = {
     imageURL: $('#edit-pin-image').val(),
-    boardId: pinBoardId,
+    boardId: $('[name = "selectedBoard"]:checked').val(),
   };
   pinsData.updatePin(selectedPinId, modifiedPin)
     .then(() => {

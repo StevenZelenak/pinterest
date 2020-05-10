@@ -87,19 +87,17 @@ const submitEditBoardEvent = (e) => {
     .catch((err) => console.error('could not update board', err));
 };
 
-const buildBoardCheckBoxes = () => {
+const buildBoardCheckBoxes = (pinBoardId) => {
   const getFireCurrentUser = firebase.auth().currentUser;
   const getUserUid = getFireCurrentUser.uid;
   boardsData.getBoardsByUid(getUserUid)
     .then((boardId) => {
       let domString = '';
       boardId.forEach((board) => {
-        console.error(board);
         domString += '<div class="form-check">';
-        domString += `<input type="checkbox" class="form-check-input" id="${board.id}">`;
+        domString += `<input type="radio" class="form-check-input" id="${board.id}" name="selectedBoard" value="${board.id}" ${(board.id === pinBoardId) ? 'checked' : ''}>`;
         domString += `<label class="form-check-label" for="${board.id}">${board.name}</label>`;
         domString += '</div>';
-        console.error(domString);
       });
       utils.printToDom('checkbox-div', domString);
     })

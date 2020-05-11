@@ -4,7 +4,7 @@
 
 ### Create Boards, add pins or move the pins, delete the pins, do whatever you want!
 
-![Screenshot](https://imgur.com/jhkeZPz)
+![Screenshot](https://i.imgur.com/jhkeZPz.png)
 
 ![Screenshot](https://i.imgur.com/cQEAQad.png)
 
